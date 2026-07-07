@@ -1,40 +1,33 @@
-<Project Sdk="Microsoft.NET.Sdk">
+name: Build Mod
 
-  <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
-    <LangVersion>latest</LangVersion>
-    <Nullable>disable</Nullable>
-    <AssemblyName>ActivateSprinklersMobile</AssemblyName>
-    <RootNamespace>ActivateSprinklersMobile</RootNamespace>
-    <EnableDefaultCompileItems>true</EnableDefaultCompileItems>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-  </PropertyGroup>
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
-  <ItemGroup>
-    <!-- Game and SMAPI assemblies copied from the Android SMAPI install.
-         Private=false means "don't copy these into the output folder" -
-         SMAPI already provides them at runtime. -->
-    <Reference Include="StardewValley">
-      <HintPath>../StardewValley.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="StardewModdingAPI">
-      <HintPath>../StardewModdingAPI.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="MonoGame.Framework">
-      <HintPath>../MonoGame.Framework.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>../Newtonsoft.Json.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="xTile">
-      <HintPath>../xTile.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
-    <Reference Include="0Harmony">
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 6
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '6.0.x'
+
+      - name: Restore
+        run: dotnet restore
+
+      - name: Build
+        run: dotnet build --configuration Release
+
+      - name: Upload built mod
+        uses: actions/upload-artifact@v4
+        with:
+          name: ActivateSprinklersMobile-build
+          path: bin/Release/net6.0/    <Reference Include="0Harmony">
       <HintPath>../0Harmony.dll</HintPath>
       <Private>false</Private>
     </Reference>
