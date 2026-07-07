@@ -1,36 +1,18 @@
-name: Build Mod
+<Project Sdk="Microsoft.NET.Sdk">
 
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <AssemblyName>ActivateSprinklersMobile</AssemblyName>
+    <RootNamespace>ActivateSprinklersMobile</RootNamespace>
+    <EnableModDeploy>false</EnableModDeploy>
+    <EnableModZip>true</EnableModZip>
+    <EnableHarmony>true</EnableHarmony>
+  </PropertyGroup>
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Setup .NET 6
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '6.0.x'
-
-      - name: Restore
-        run: dotnet restore
-
-      - name: Build
-        run: dotnet build --configuration Release
-
-      - name: Upload built mod
-        uses: actions/upload-artifact@v4
-        with:
-          name: ActivateSprinklersMobile-build
-          path: bin/Release/net6.0/    <Reference Include="0Harmony">
-      <HintPath>../0Harmony.dll</HintPath>
-      <Private>false</Private>
-    </Reference>
+  <ItemGroup>
+    <PackageReference Include="Pathoschild.Stardew.ModBuildConfig" Version="4.3.2" />
   </ItemGroup>
 
 </Project>
