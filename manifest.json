@@ -1,0 +1,11 @@
+{
+  "Name": "Activate Sprinklers Mobile",
+  "Author": "YourName",
+  "Version": "1.0.0",
+  "Description": "Tap any sprinkler to instantly water its full range, just like at 6 AM. Fully touch/mobile friendly, no right-click or hotkeys required.",
+  "UniqueID": "YourName.ActivateSprinklersMobile",
+  "EntryDll": "ActivateSprinklersMobile.dll",
+  "MinimumApiVersion": "4.3.2",
+  "Dependencies": [],
+  "UpdateKeys": []
+}
